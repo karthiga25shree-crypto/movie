@@ -1,0 +1,178 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineVerse AI | Discover Your Next Movie</title>
+    <meta name="description" content="Discover movies based on your mood, favorite genres, and interests with CineVerse AI.">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <a href="#" class="logo">🎬 CineVerse<span>AI</span></a>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#discover">Discover</a>
+        <a href="#moods">Mood Match</a>
+        <a href="#favorites">My Watchlist</a>
+    </nav>
+
+    <button class="profile-btn" id="profileBtn" aria-label="Profile">👤</button>
+</header>
+
+<main>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="badge">✨ YOUR PERSONAL MOVIE UNIVERSE</span>
+
+            <h1>Find Movies That<br><span>Match Your Vibe.</span></h1>
+
+            <p>
+                Discover your next favorite movie with personalized
+                recommendations made for your mood.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#discover" class="btn primary">Explore Movies →</a>
+                <button class="btn secondary" id="surpriseBtn">🎲 Surprise Me</button>
+            </div>
+
+            <div class="hero-stats">
+                <div><strong id="movieCount">24+</strong><span>Movies to explore</span></div>
+                <div><strong>8</strong><span>Genres</span></div>
+                <div><strong>∞</strong><span>Movie nights</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="moods">
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">HOW ARE YOU FEELING?</span>
+                <h2>Choose Your Mood ✨</h2>
+            </div>
+            <button class="text-btn" id="clearMood">Clear selection ↗</button>
+        </div>
+
+        <div class="mood-grid">
+            <button class="mood-card" data-mood="Happy">😊<span>Happy</span></button>
+            <button class="mood-card" data-mood="Romantic">❤️<span>Romantic</span></button>
+            <button class="mood-card" data-mood="Thriller">😱<span>Thrilled</span></button>
+            <button class="mood-card" data-mood="Adventure">🌍<span>Adventurous</span></button>
+            <button class="mood-card" data-mood="Thoughtful">🧠<span>Mind-blown</span></button>
+            <button class="mood-card" data-mood="Relaxed">🌙<span>Relaxed</span></button>
+        </div>
+    </section>
+
+    <section class="section" id="discover">
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">YOUR NEXT BINGE STARTS HERE</span>
+                <h2>Discover Movies 🎬</h2>
+            </div>
+        </div>
+
+        <div class="filters">
+            <label class="search-box">
+                <span>🔍</span>
+                <input type="search" id="searchInput" placeholder="Search movies, genres, languages...">
+            </label>
+
+            <select id="genreFilter" aria-label="Filter by genre">
+                <option value="All">All Genres</option>
+                <option value="Action">Action</option>
+                <option value="Romance">Romance</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Drama">Drama</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Animation">Animation</option>
+            </select>
+
+            <select id="languageFilter" aria-label="Filter by language">
+                <option value="All">All Languages</option>
+                <option value="Tamil">Tamil</option>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Malayalam">Malayalam</option>
+                <option value="Korean">Korean</option>
+            </select>
+
+            <select id="sortFilter" aria-label="Sort movies">
+                <option value="recommended">Recommended</option>
+                <option value="rating">Highest Rated</option>
+                <option value="year">Newest First</option>
+                <option value="title">Title A–Z</option>
+            </select>
+        </div>
+
+        <div class="results-info">
+            <span id="resultsCount" aria-live="polite">Loading movies...</span>
+            <button class="text-btn" id="resetFilters">Reset filters ↻</button>
+        </div>
+
+        <div class="movie-grid" id="movieGrid"></div>
+
+        <div class="empty-state" id="emptyState" hidden>
+            <div>🎞️</div>
+            <h3>No movies found</h3>
+            <p>Try another search or change your filters.</p>
+            <button class="btn primary" id="emptyReset">Explore all movies</button>
+        </div>
+    </section>
+
+    <section class="section favorites-section" id="favorites">
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">YOUR PERSONAL COLLECTION</span>
+                <h2>My Watchlist ❤️</h2>
+            </div>
+        </div>
+        <div class="movie-grid" id="favoritesGrid"></div>
+        <p class="muted" id="favoritesEmpty">Your watchlist is waiting! Tap the heart on a movie to save it.</p>
+    </section>
+
+    <section class="cta-section">
+        <div>
+            <span class="eyebrow">MOVIE NIGHT, SORTED</span>
+            <h2>Life's too short for bad movies.</h2>
+            <p>Let CineVerse help you discover something amazing.</p>
+        </div>
+        <button class="btn primary" id="ctaBtn">Find My Movie ✨</button>
+    </section>
+</main>
+
+<footer>
+    <a href="#home" class="logo">🎬 CineVerse<span>AI</span></a>
+    <p>Made for movie lovers. Powered by your vibe. ❤️</p>
+    <p class="footer-small">Demo version · Movie data is illustrative</p>
+</footer>
+
+<div class="modal" id="movieModal" role="dialog" aria-modal="true"
+     aria-labelledby="modalTitle" hidden>
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+        <button class="close-modal" id="closeModal" aria-label="Close dialog">✕</button>
+        <img id="modalPoster" src="" alt="Movie poster">
+        <div class="modal-info">
+            <span class="eyebrow" id="modalGenre"></span>
+            <h2 id="modalTitle"></h2>
+            <p class="modal-meta" id="modalMeta"></p>
+            <p id="modalDescription"></p>
+            <div id="modalTags" class="tag-list"></div>
+            <button class="btn primary" id="modalFavorite">❤️ Add to Watchlist</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
+```
